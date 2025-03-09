@@ -7,6 +7,8 @@ from sklearn.ensemble import RandomForestClassifier
 import numpy as np
 from PIL import Image
 
+
+
 # Load and preprocess the dataset
 dataset = dataset = pd.read_csvdataset = pd.read_csv(r"C:\Users\vaish\Downloads\Disease-Diagnosis-and-Recommendation-System-main\Disease-Diagnosis-and-Recommendation-System-main\datasets\general.csv")
 X = dataset.drop('Disease', axis=1)
@@ -97,7 +99,7 @@ def main():
     with st.sidebar:
         image = Image.open(r"C:\Users\vaish\Downloads\Disease-Diagnosis-and-Recommendation-System-main\Disease-Diagnosis-and-Recommendation-System-main\images\navbar.png")
         st.image(image,width =200) 
-        selected = option_menu('Disease Diagnosis and Recommendation System',
+        selected = option_menu('Meidcal Diagnosis using AI',
                               
                               ['GENERAL','Diabetes Prediction',
                                'Heart Disease Prediction',
@@ -111,9 +113,9 @@ def main():
         col1,col2 = st.columns([2,1])
         with col1:
          # Get user input
-           temp_f = st.text_input("Temperature (F):", value=0)
+           temp_f = st.text_input("Temperature (Fahrenheit):", value=0)
            pulse_rate_bpm = st.text_input("Pulse rate (bpm):", value=0)
-           st.write("Check the Symptoms you have below:")
+           st.write("Check your Symptoms:")
            vomiting = st.checkbox("Vomiting")
            yellowish_urine = st.checkbox("Yellowish Urine")
            indigestion = st.checkbox("Indigestion")
@@ -122,9 +124,9 @@ def main():
            if st.button("Test Result"):
                predicted_disease = predict_disease(temp_f, pulse_rate_bpm, vomiting, yellowish_urine, indigestion)
                medicine_recommendations = {
-       'Heart Disease': 'Follow a heart-healthy diet and exercise regularly.\nIt is crucial to attend all scheduled appointments with your doctor for proper monitoring and management.',
-       'Viral Fever/Cold': 'Get plenty of rest and stay hydrated.\nIf your fever persists or is accompanied by severe symptoms, visit a doctor for proper evaluation and treatment.',
-       'Jaundice': 'Rest, stay well-hydrated, and follow a balanced diet.\nIf you notice yellowing of the skin or eyes (jaundice), seek medical attention immediately for proper diagnosis and treatment.',
+       'Heart Disease': 'It is crucial to attend all scheduled appointments with your doctor for proper monitoring and management and follow heart-healthy diet.',
+       'Viral Fever/Cold': 'If your fever persists or is accompanied by severe symptoms, visit a doctor for proper evaluation and treatment.\nStay hydrated.',
+       'Jaundice': 'If you notice yellowing of the skin or eyes (jaundice), seek medical attention immediately for proper diagnosis and treatment.',
        'Food Poisoning': 'Stay hydrated and avoid solid foods until symptoms subside.\nIf you experience severe symptoms, seek medical attention promptly for proper evaluation and treatment.',
        'Normal': 'Maintain a healthy lifestyle with regular exercise and a balanced diet.\nEven if you are feeling well, have regular check-ups with your doctor to monitor your overall health.'
         } 
@@ -156,13 +158,13 @@ def main():
         col1, col2, col3,col4= st.columns(4)
         
         with col1:
-            Pregnancies = st.text_input('No of Pregnancies')
+            Pregnancies = st.text_input('Number of Pregnancies')
             
         with col2:
             Glucose = st.text_input('Glucose Level')
         
         with col3:
-            BloodPressure = st.text_input('Blood Pressure value')
+            BloodPressure = st.text_input('BP value')
         
         with col1:
             SkinThickness = st.text_input('Skin Thickness value')
@@ -171,7 +173,7 @@ def main():
             Insulin = st.text_input('Insulin Level')
         
         with col3:
-            BMI = st.text_input('BMI')
+            BMI = st.text_input('Body Mass Index')
         
         with col1:
             DiabetesPedigreeFunction = st.text_input('Diabetes Pedigree Function value')
@@ -192,7 +194,7 @@ def main():
             diab_prediction = diabetes_model.predict([[Pregnancies, Glucose, BloodPressure, SkinThickness, Insulin, BMI, DiabetesPedigreeFunction, Age]])
             
             if (diab_prediction[0] == 1):
-              st.success('The person is diabetic')
+              st.success('The person is Diabetic')
               with st.expander("Medicine Recommendation:"):
                     st.info(f"Medicine Recommendation: {'Please Consult a Medical Profesional. Please follow a balanced and healthy diet. It is important to exercise regularly.'}")
             else:
@@ -419,7 +421,7 @@ st.write("\n")
 st.write("\n")
 st.write("\n")
 st.write("\n")
-st.markdown("<p style = 'color:black;'>This is a prediction web app for informational purposes only.\nPlease consult a doctor or visit a hospital for proper diagnosis and treatment.</p>",unsafe_allow_html=True)
+#st.markdown("<p style = 'color:black;'>This is a prediction web app for informational purposes only.\nPlease consult a doctor or visit a hospital for proper diagnosis and treatment.</p>",unsafe_allow_html=True)
 st.write("\n")
 st.write("\n")
 st.markdown('<p style="font-size:12px; color:#FF4B4B;">©2025 Internship VT</p>', unsafe_allow_html=True)
